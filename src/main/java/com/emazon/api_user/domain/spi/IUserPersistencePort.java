@@ -8,5 +8,7 @@ public interface IUserPersistencePort {
     void saveUser(UserSave userSave);
 
     boolean getUserByEmail(String email);
+
+    String encryptedPassword(String password);
 }
 

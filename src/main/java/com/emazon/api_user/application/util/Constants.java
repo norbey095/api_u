@@ -11,8 +11,7 @@ public class Constants {
     public static final String BIRTHDATE_REQUIRED = "The parameter 'birthdate' cannot be empty";
     public static final String EMAIL_REQUIRED = "The parameter 'email' cannot be empty";
     public static final String PASSWORD_REQUIRED = "The parameter 'password' cannot be empty";
-    public static final String IDROL_REQUIRED = "The parameter 'idRol' cannot be empty";
-    public static final String DOCUMENT_REGEX = "^\\d$";
+    public static final String CREATE_USER = "User created successfully";
 
     private Constants() {
 

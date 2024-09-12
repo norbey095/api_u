@@ -5,9 +5,6 @@ public class ExceptionResponse {
     private String message;
     private String status;
 
-    public ExceptionResponse() {
-    }
-
     public ExceptionResponse(String message, String status) {
         this.message = message;
         this.status = status;

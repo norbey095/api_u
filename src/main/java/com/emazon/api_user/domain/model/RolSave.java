@@ -6,6 +6,9 @@ public class RolSave {
     private String name;
     private String description;
 
+    public RolSave() {
+    }
+
     public RolSave(Integer id, String name, String description) {
         this.id = id;
         this.name = name;

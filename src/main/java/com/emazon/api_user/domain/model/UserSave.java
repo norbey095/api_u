@@ -3,10 +3,9 @@ package com.emazon.api_user.domain.model;
 import java.time.LocalDate;
 
 public class UserSave {
-    private Integer id;
     private String name;
     private String lastName;
-    private Integer documentNumber;
+    private String documentNumber;
     private String cellPhone;
     private LocalDate birthdate;
     private String email;
@@ -14,7 +13,6 @@ public class UserSave {
     private Integer idRol;
 
     private UserSave(UserBuilder builder) {
-        this.id = builder.id;
         this.name = builder.name;
         this.lastName = builder.lastName;
         this.documentNumber = builder.documentNumber;
@@ -25,10 +23,9 @@ public class UserSave {
         this.idRol = builder.idRol;
     }
 
-    public Integer getId() { return id; }
     public String getName() { return name; }
     public String getLastName() { return lastName; }
-    public Integer getDocumentNumber() { return documentNumber; }
+    public String getDocumentNumber() { return documentNumber; }
     public String getCellPhone() { return cellPhone; }
     public LocalDate getBirthdate() { return birthdate; }
     public String getEmail() { return email; }
@@ -40,20 +37,14 @@ public class UserSave {
     }
 
     public static class UserBuilder {
-        private Integer id;
         private String name;
         private String lastName;
-        private Integer documentNumber;
+        private String documentNumber;
         private String cellPhone;
         private LocalDate birthdate;
         private String email;
         private String password;
         private Integer idRol;
-
-        public UserBuilder setId(Integer id) {
-            this.id = id;
-            return this;
-        }
 
         public UserBuilder setName(String name) {
             this.name = name;
@@ -65,7 +56,7 @@ public class UserSave {
             return this;
         }
 
-        public UserBuilder setDocumentNumber(Integer documentNumber) {
+        public UserBuilder setDocumentNumber(String documentNumber) {
             this.documentNumber = documentNumber;
             return this;
         }

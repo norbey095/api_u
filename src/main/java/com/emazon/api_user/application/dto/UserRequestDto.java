@@ -1,7 +1,6 @@
 package com.emazon.api_user.application.dto;
 
 import com.emazon.api_user.application.util.Constants;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
@@ -18,9 +17,8 @@ public class UserRequestDto {
     private String name;
     @NotBlank(message = Constants.LAST_NAME_REQUIRED)
     private String lastName;
-    @NotNull(message = Constants.DOCUMENT_REQUIRED)
-    @Min(value = 0, message = "El documento de identidad debe ser un número positivo")
-    private Integer documentNumber;
+    @NotBlank(message = Constants.DOCUMENT_REQUIRED)
+    private String documentNumber;
     @NotBlank(message = Constants.CELLPHONE_REQUIRED)
     private String cellPhone;
     @NotNull(message = Constants.BIRTHDATE_REQUIRED)
@@ -29,6 +27,4 @@ public class UserRequestDto {
     private String email;
     @NotBlank(message = Constants.PASSWORD_REQUIRED)
     private String password;
-    @NotNull(message = Constants.IDROL_REQUIRED)
-    private Integer idRol;
 }

@@ -1,12 +1,8 @@
 package com.emazon.api_user.infraestructure.exceptionhandler;
 
-import com.emazon.api_user.domain.exception.MinorInvalidException;
-import com.emazon.api_user.domain.exception.PhoneNumberinvalidException;
-import com.emazon.api_user.domain.exception.UserAlreadyExistsException;
-import com.emazon.api_user.domain.exception.UserEmailInvalidException;
+import com.emazon.api_user.domain.exception.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -30,14 +26,6 @@ public class ControllerUserAdvisor {
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exceptionResponse);
-    }
-
-    @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ExceptionResponse> handleHttpMessageNotReadableException
-            (HttpMessageNotReadableException ex) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(
-                ExceptionResponseConstants.FIELD_INVALID.getMessage(),
-                HttpStatus.BAD_REQUEST.toString()));
     }
 
     @ExceptionHandler(UserAlreadyExistsException.class)
@@ -66,5 +54,19 @@ public class ControllerUserAdvisor {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionResponse(
                 ExceptionResponseConstants.MINOR_INVALID.getMessage(),
                 HttpStatus.CONFLICT.toString()));
+    }
+
+    @ExceptionHandler(RolAuxBodegaInvalidException.class)
+    public ResponseEntity<ExceptionResponse> handleRolAuxBodegaInvalidException(RolAuxBodegaInvalidException exception) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(new ExceptionResponse(
+                ExceptionResponseConstants.ROL_AUX_BODE_EXISTS.getMessage(),
+                HttpStatus.CONFLICT.toString()));
+    }
+
+    @ExceptionHandler(DocumentInvalidException.class)
+    public ResponseEntity<ExceptionResponse> handleDocumentInvalidException(DocumentInvalidException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(
+                ExceptionResponseConstants.DOCUMENT_NUMBER_POSITIVE.getMessage(),
+                HttpStatus.BAD_REQUEST.toString()));
     }
 }

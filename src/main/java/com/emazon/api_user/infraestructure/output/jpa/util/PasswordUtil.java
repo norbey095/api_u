@@ -4,6 +4,12 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordUtil {
 
+    private static final String UTIL_CLASS = "Utility class";
+
+    private PasswordUtil() {
+        throw new UnsupportedOperationException(UTIL_CLASS);
+    }
+
     public static String encryptPassword(String plainPassword) {
         return BCrypt.hashpw(plainPassword, BCrypt.gensalt());
     }
