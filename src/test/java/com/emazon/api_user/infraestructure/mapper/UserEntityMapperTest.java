@@ -1,8 +1,8 @@
 package com.emazon.api_user.infraestructure.mapper;
 
 import com.emazon.api_user.domain.model.UserSave;
-import com.emazon.api_user.infraestructure.output.jpa.entity.UserEntity;
-import com.emazon.api_user.infraestructure.output.jpa.mapper.UserEntityMapper;
+import com.emazon.api_user.infraestructure.output.entity.UserEntity;
+import com.emazon.api_user.infraestructure.output.mapper.UserEntityMapper;
 import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
