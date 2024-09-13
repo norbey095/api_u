@@ -1,6 +1,6 @@
-package com.emazon.api_user.infraestructure.output.jpa.reposiroty;
+package com.emazon.api_user.infraestructure.output.reposiroty;
 
-import com.emazon.api_user.infraestructure.output.jpa.entity.RolEntity;
+import com.emazon.api_user.infraestructure.output.entity.RolEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface IRolRepository extends JpaRepository<RolEntity, Integer> {

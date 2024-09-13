@@ -1,6 +1,6 @@
-package com.emazon.api_user.infraestructure.output.jpa.reposiroty;
+package com.emazon.api_user.infraestructure.output.reposiroty;
 
-import com.emazon.api_user.infraestructure.output.jpa.entity.UserEntity;
+import com.emazon.api_user.infraestructure.output.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

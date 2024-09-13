@@ -1,6 +1,7 @@
 package com.emazon.api_user.infraestructure.output.jpa.adapter;
 
 import com.emazon.api_user.domain.model.UserSave;
+import com.emazon.api_user.infraestructure.output.jpa.adapter.jpaadapter.UserJpaAdapter;
 import com.emazon.api_user.infraestructure.output.jpa.entity.UserEntity;
 import com.emazon.api_user.infraestructure.output.jpa.mapper.UserEntityMapper;
 import com.emazon.api_user.infraestructure.output.jpa.reposiroty.IUserRepository;
