@@ -7,8 +7,6 @@ import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class RolEntityMapperTest {
@@ -17,8 +15,10 @@ class RolEntityMapperTest {
 
     @Test
     void testRolEntityToRolSave() {
-        RolEntity rolEntity = new RolEntity(Constans.ROL_ID, Constans.ROL_NAME
-                , Constans.ROL_DESCRIPTION,new ArrayList<>());
+        RolEntity rolEntity = new RolEntity();
+        rolEntity.setId(Constans.ROL_ID);
+        rolEntity.setName( Constans.ROL_NAME);
+        rolEntity.setDescription(Constans.ROL_DESCRIPTION);
 
         RolSave rolSave = rolEntityMapper.rolEntityToRolSave(rolEntity);
 

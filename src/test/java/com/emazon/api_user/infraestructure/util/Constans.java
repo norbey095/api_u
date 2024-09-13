@@ -22,16 +22,27 @@ public class Constans {
     public static final String NAME = "Duvan";
     public static final String LAST_NAME = "Sanchez";
     public static final String DOCUMENT = "120142541";
-    public static final String CELLPHONE = "3254557253";
     public static final LocalDate BIRTHDATE=  LocalDate.of(2000, 9, 4);
     public static final String EMAIL = "duvan123@gmail.com";
     public static final String PASSWORD= "1234";
     public static final String PASSWORD_ENCRYPT= "myPassword123";
     public static final Integer ROL_ID= 1;
-    public static final Integer VALUE_1 = 1;
     public static final String ROL_NAME= "Auxiliar";
     public static final String ROL_DESCRIPTION= "Auxiliar";
     public static final String MESSAGESS_SUCCESS = "User created successfully";
+    public static final String USER_NAME = "testuser";
+    public static final String ADMIN = "ADMIN";
+    public static final String EMAIL_EJEM = "test@example.com";
+    public static final String NAME_INVALID = "The extracted username is not the expected one.";
+    public static final Integer VALUE_100 = 1000;
+    public static final Integer VALUE_60 = 60;
+    public static final String TOKEN_VALID = "Token válid.";
+    public static final String TOKEN_INVALID = "Token Inválid.";
+    public static final String ROL_NAME_AUXILIAR= "ROLE_Auxiliar";
+    public static final String URL_AUTHENTICATION= "/auth/login";
+    public static final String AUTHORIZATION= "authorization";
+    public static final String JWTTOKEN = "jwtToken";
+    public static final String PASSWORD_NAME = "password";
 
 
     private Constans() {

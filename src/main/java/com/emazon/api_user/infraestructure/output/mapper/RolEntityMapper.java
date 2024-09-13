@@ -7,6 +7,6 @@ import org.mapstruct.Mapper;
 @Mapper(componentModel = "spring")
 public interface RolEntityMapper {
 
-    RolSave rolEntityToRolSave (RolEntity rolEntity);
+    RolSave rolEntityToRolSave(RolEntity rolEntity);
 
 }

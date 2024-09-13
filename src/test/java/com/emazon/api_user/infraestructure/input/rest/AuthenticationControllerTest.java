@@ -1,8 +1,8 @@
 package com.emazon.api_user.infraestructure.input.rest;
 
-import com.emazon.api_user.application.ResponseSuccess;
-import com.emazon.api_user.application.dto.UserRequestDto;
-import com.emazon.api_user.application.handler.IUserHandler;
+import com.emazon.api_user.application.authentication.AuthenticationRequest;
+import com.emazon.api_user.application.authentication.AuthenticationResponse;
+import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.util.Constans;
 import org.junit.jupiter.api.Test;
@@ -19,13 +19,13 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-class UserRestControllerTest {
+class AuthenticationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private IUserHandler userHandler;
+    private AuthenticationService authenticationService;
 
     @MockBean
     private JwtService jwtService;
@@ -33,13 +33,15 @@ class UserRestControllerTest {
     @Test
     @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
     void createUser_ShouldReturnStatusCreated() throws Exception {
-        ResponseSuccess responseSuccess = new ResponseSuccess(Constans.MESSAGESS_SUCCESS);
-        Mockito.when(userHandler.saveUser(Mockito.any(UserRequestDto.class)))
-                .thenReturn(responseSuccess);
+        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(Constans.ROL_DESCRIPTION);
 
-        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+        Mockito.when(authenticationService.authenticate(authenticationRequest))
+                .thenReturn(authenticationResponse);
+
+        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_AUTHENTICATION)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(Constans.JSON_REQUEST))
-                .andExpect(MockMvcResultMatchers.status().isCreated());
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

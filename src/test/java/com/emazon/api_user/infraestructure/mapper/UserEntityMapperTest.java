@@ -1,5 +1,6 @@
 package com.emazon.api_user.infraestructure.mapper;
 
+import com.emazon.api_user.domain.model.RolSave;
 import com.emazon.api_user.domain.model.UserSave;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
 import com.emazon.api_user.infraestructure.output.mapper.UserEntityMapper;
@@ -23,6 +24,7 @@ class UserEntityMapperTest {
                 .setBirthdate(Constans.BIRTHDATE)
                 .setEmail(Constans.EMAIL)
                 .setPassword(Constans.PASSWORD)
+                .setRol(new RolSave(Constans.ROL_ID,Constans.NAME,Constans.ROL_DESCRIPTION))
                 .build();
 
         UserEntity userEntity = userEntityMapper.userToUserEntity(userSave);
