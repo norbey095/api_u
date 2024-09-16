@@ -43,6 +43,12 @@ public class Constans {
     public static final String AUTHORIZATION= "authorization";
     public static final String JWTTOKEN = "jwtToken";
     public static final String PASSWORD_NAME = "password";
+    public static final String INAUTHORIZATION= "Incorrect login information";
+    public static final String DATE_TIME= "The date format is invalid, the format is yyyy-mm-dd";
+    public static final String INPUT= "INPUT";
+    public static final Integer VALUE_0= 0;
+    public static final String USER_NOT_FOUND_POINTS = "User not found: ";
+
 
 
     private Constans() {

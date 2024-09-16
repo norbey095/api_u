@@ -12,7 +12,8 @@ public enum ExceptionResponseConstants {
     DOCUMENT_NUMBER_POSITIVE ("The ID document must be a positive number"),
     INCORRECT_DATA("Incorrect login information"),
     ACCESS_DENE("Access denied"),
-    TOKEN_INVALID("Unauthorized: incorrect information");
+    FORMAT_DATE_INVALID ("The date format is invalid, the format is yyyy-mm-dd");
+
 
     private final String message;
 

@@ -1,6 +1,7 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
 
 import com.emazon.api_user.infraestructure.output.util.Constants;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -61,17 +62,19 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername()));
+        try {
+            final String username = extractUsername(token);
+            return (username.equals(userDetails.getUsername()));
+        } catch (JwtException | IllegalArgumentException e) {
+            return false;
+        }
     }
 
-    private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
+    private Claims extractAllClaims(String token){
+        return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
-
 }

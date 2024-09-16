@@ -1,4 +1,4 @@
-package com.emazon.api_user.application.authentication;
+package com.emazon.api_user.application.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationResponse {
+public class AuthenticationResponseDto {
     private String token;
 }

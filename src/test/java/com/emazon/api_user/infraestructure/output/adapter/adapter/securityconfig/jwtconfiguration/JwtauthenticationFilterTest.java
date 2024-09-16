@@ -1,4 +1,4 @@
-package com.emazon.api_user.infraestructure.output.adapter.jpaadapter.jwtconfiguration;
+package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfig.jwtconfiguration;
 
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;

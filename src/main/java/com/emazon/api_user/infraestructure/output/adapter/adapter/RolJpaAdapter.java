@@ -1,4 +1,4 @@
-package com.emazon.api_user.infraestructure.output.adapter.jpaadapter;
+package com.emazon.api_user.infraestructure.output.adapter.adapter;
 
 
 import com.emazon.api_user.domain.model.RolSave;

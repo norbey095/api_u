@@ -1,4 +1,4 @@
-package com.emazon.api_user.application.authentication;
+package com.emazon.api_user.application.dto.authentication;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class AuthenticationRequestDto {
     private String email;
     private String password;
 }

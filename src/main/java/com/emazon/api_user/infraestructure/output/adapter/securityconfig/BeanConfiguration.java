@@ -1,6 +1,5 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig;
 
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.reposiroty.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

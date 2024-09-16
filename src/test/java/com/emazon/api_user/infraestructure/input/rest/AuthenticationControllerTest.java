@@ -1,7 +1,7 @@
 package com.emazon.api_user.infraestructure.input.rest;
 
-import com.emazon.api_user.application.authentication.AuthenticationRequest;
-import com.emazon.api_user.application.authentication.AuthenticationResponse;
+import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
+import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.util.Constans;
@@ -33,11 +33,11 @@ class AuthenticationControllerTest {
     @Test
     @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
     void createUser_ShouldReturnStatusCreated() throws Exception {
-        AuthenticationRequest authenticationRequest = new AuthenticationRequest();
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse(Constans.ROL_DESCRIPTION);
+        AuthenticationRequestDto authenticationRequestDto = new AuthenticationRequestDto();
+        AuthenticationResponseDto authenticationResponseDto = new AuthenticationResponseDto(Constans.ROL_DESCRIPTION);
 
-        Mockito.when(authenticationService.authenticate(authenticationRequest))
-                .thenReturn(authenticationResponse);
+        Mockito.when(authenticationService.authenticate(authenticationRequestDto))
+                .thenReturn(authenticationResponseDto);
 
         mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_AUTHENTICATION)
                         .contentType(MediaType.APPLICATION_JSON)

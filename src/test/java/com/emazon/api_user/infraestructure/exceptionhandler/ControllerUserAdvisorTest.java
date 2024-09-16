@@ -12,10 +12,13 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+
+import java.time.format.DateTimeParseException;
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
@@ -122,5 +125,36 @@ class ControllerUserAdvisorTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
                         .value(Constans.DOCUMENT_NUMBER_POSITIVE));
+    }
+
+    @Test
+    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    void whenBadCredentialsException_thenReturnsConflict() throws Exception {
+        Mockito.doThrow(new BadCredentialsException(Constans.INAUTHORIZATION)).when(userHandler)
+                .saveUser(Mockito.any(UserRequestDto.class));
+
+        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(Constans.JSON_REQUEST))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
+                        .value(Constans.INAUTHORIZATION));
+    }
+
+    @Test
+    @WithMockUser(username = Constans.USER_NAME, roles = {Constans.ADMIN})
+    void whenDateTimeParseException_thenReturnsConflict() throws Exception {
+        DateTimeParseException dateTimeParseException = new DateTimeParseException(Constans.DATE_TIME,
+                Constans.INPUT, Constans.VALUE_0);
+
+        Mockito.doThrow(dateTimeParseException).when(userHandler)
+                .saveUser(Mockito.any(UserRequestDto.class));
+
+        mockMvc.perform(MockMvcRequestBuilders.post(Constans.URL_USER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(Constans.JSON_REQUEST))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath(Constans.MESSAGE)
+                        .value(Constans.DATE_TIME));
     }
 }

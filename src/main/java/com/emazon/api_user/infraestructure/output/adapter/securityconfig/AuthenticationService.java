@@ -1,10 +1,9 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig;
 
-import com.emazon.api_user.application.authentication.AuthenticationRequest;
-import com.emazon.api_user.application.authentication.AuthenticationResponse;
+import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
+import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.reposiroty.IUserRepository;
-import com.emazon.api_user.infraestructure.output.util.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,7 +18,7 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
 
-    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+    public AuthenticationResponseDto authenticate(AuthenticationRequestDto request) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -27,12 +26,9 @@ public class AuthenticationService {
                 )
         );
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        var userName = repository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException(Constants.USER_NOT_FOUND))
-                .getEmail();
 
-        var jwtToken = jwtService.generateToken(userName,userDetails);
-        return AuthenticationResponse.builder()
+        var jwtToken = jwtService.generateToken(userDetails.getUsername(),userDetails);
+        return AuthenticationResponseDto.builder()
                 .token(jwtToken)
                 .build();
     }

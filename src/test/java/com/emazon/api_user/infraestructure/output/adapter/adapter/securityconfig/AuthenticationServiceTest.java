@@ -1,7 +1,7 @@
-package com.emazon.api_user.infraestructure.output.adapter.jpaadapter;
+package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfig;
 
-import com.emazon.api_user.application.authentication.AuthenticationRequest;
-import com.emazon.api_user.application.authentication.AuthenticationResponse;
+import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
+import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
@@ -54,7 +54,7 @@ class AuthenticationServiceTest {
         String email = Constans.EMAIL_EJEM;
         String password = Constans.PASSWORD_NAME;
 
-        AuthenticationRequest request = new AuthenticationRequest(email, password);
+        AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
         String token = Constans.JWTTOKEN;
 
         UserEntity userEntity = new UserEntity();
@@ -68,7 +68,7 @@ class AuthenticationServiceTest {
         when(repository.findByEmail(email)).thenReturn(Optional.of(userEntity));
         when(jwtService.generateToken(email, userDetails)).thenReturn(token);
 
-        AuthenticationResponse response = authenticationService.authenticate(request);
+        AuthenticationResponseDto response = authenticationService.authenticate(request);
 
         assertEquals(token, response.getToken());
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
@@ -80,7 +80,7 @@ class AuthenticationServiceTest {
     void testAuthenticate_UserNotFound() {
         String email = Constans.EMAIL_EJEM;
         String password = Constans.PASSWORD_NAME;
-        AuthenticationRequest request = new AuthenticationRequest(email, password);
+        AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
 
         when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
                 .thenReturn(authentication);

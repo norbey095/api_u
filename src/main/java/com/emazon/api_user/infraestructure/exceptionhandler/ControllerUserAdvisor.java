@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.nio.file.AccessDeniedException;
+import java.time.format.DateTimeParseException;
 
 @ControllerAdvice
 public class ControllerUserAdvisor {
@@ -87,5 +88,10 @@ public class ControllerUserAdvisor {
                 HttpStatus.FORBIDDEN.toString()));
     }
 
-
+    @ExceptionHandler(DateTimeParseException.class)
+    public ResponseEntity<ExceptionResponse> handleDateTimeParseException(DateTimeParseException exception) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(
+                ExceptionResponseConstants.FORMAT_DATE_INVALID.getMessage(),
+                HttpStatus.BAD_REQUEST.toString()));
+    }
 }

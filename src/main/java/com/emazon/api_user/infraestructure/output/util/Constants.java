@@ -19,6 +19,8 @@ public class Constants {
     public static final String ID_ROL = "id_rol";
     public static final String ROLE = "ROLE_";
     public static final String ROL = "rol";
+    public static final String APPLICATION_JSON = "application/json";
+    public static final String TOKEN_INVALID = "Invalid token: signature does not match.";
 
     private Constants() {
     }

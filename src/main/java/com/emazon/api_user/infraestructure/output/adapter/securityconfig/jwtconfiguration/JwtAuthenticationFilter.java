@@ -1,7 +1,10 @@
 package com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration;
 
+import com.emazon.api_user.infraestructure.exceptionhandler.ExceptionResponse;
 import com.emazon.api_user.infraestructure.output.util.Constants;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,30 +32,40 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     @NonNull HttpServletResponse response,
                                     @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        final String authHeader = request.getHeader(Constants.AUTHORIZATION);
-        final String jwt;
-        final String userName;
-        if (authHeader == null || !authHeader.startsWith(Constants.BEARER)) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-        jwt = authHeader.substring(Constants.VALUE_7);
-        userName = jwtService.extractUsername(jwt);
-
-        if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
-
-            if (jwtService.isTokenValid(jwt, userDetails)) {
-                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails,
-                        null,
-                        userDetails.getAuthorities()
-                );
-                authToken.setDetails(
-                        new WebAuthenticationDetailsSource().buildDetails(request)
-                );
-                SecurityContextHolder.getContext().setAuthentication(authToken);
+        try {
+            final String authHeader = request.getHeader(Constants.AUTHORIZATION);
+            final String jwt;
+            final String userName;
+            if (authHeader == null || !authHeader.startsWith(Constants.BEARER)) {
+                filterChain.doFilter(request, response);
+                return;
             }
+            jwt = authHeader.substring(Constants.VALUE_7);
+            userName = jwtService.extractUsername(jwt);
+
+            if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                UserDetails userDetails = this.userDetailsService.loadUserByUsername(userName);
+
+                if (jwtService.isTokenValid(jwt, userDetails)) {
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                            userDetails,
+                            null,
+                            userDetails.getAuthorities()
+                    );
+                    authToken.setDetails(
+                            new WebAuthenticationDetailsSource().buildDetails(request)
+                    );
+                    SecurityContextHolder.getContext().setAuthentication(authToken);
+                }
+            }
+        }  catch (Exception ex) {
+            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+            response.setContentType(Constants.APPLICATION_JSON);
+            response.getWriter().write(new ObjectMapper().writeValueAsString(new ExceptionResponse(
+                    Constants.TOKEN_INVALID,
+                    HttpStatus.UNAUTHORIZED.toString()
+            )));
+            return;
         }
         filterChain.doFilter(request, response);
     }
