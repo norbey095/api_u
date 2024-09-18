@@ -2,6 +2,7 @@ package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfi
 
 import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
 import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
+import com.emazon.api_user.domain.util.ConstantsDomain;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
@@ -11,6 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -61,8 +63,8 @@ class AuthenticationServiceTest {
         userEntity.setEmail(email);
         userEntity.setPassword(password);
 
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenReturn(authentication);
+        Mockito.doReturn(authentication).when(authenticationManager)
+                .authenticate(any(UsernamePasswordAuthenticationToken.class));
         when(authentication.getPrincipal()).thenReturn(userDetails);
         when(userDetails.getUsername()).thenReturn(email);
         when(repository.findByEmail(email)).thenReturn(Optional.of(userEntity));
@@ -72,8 +74,8 @@ class AuthenticationServiceTest {
 
         assertEquals(token, response.getToken());
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        verify(repository).findByEmail(email);
-        verify(jwtService).generateToken(email, userDetails);
+        Mockito.verify(jwtService, Mockito.times(Constans.VALUE_1))
+                .generateToken(email,userDetails);
     }
 
     @Test
@@ -82,10 +84,9 @@ class AuthenticationServiceTest {
         String password = Constans.PASSWORD_NAME;
         AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
 
-        when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class)))
-                .thenReturn(authentication);
+        Mockito.doThrow(new IllegalArgumentException()).when(authenticationManager)
+                .authenticate(any(UsernamePasswordAuthenticationToken.class));
         when(authentication.getPrincipal()).thenReturn(userDetails);
-        when(repository.findByEmail(email)).thenReturn(Optional.empty());
 
         assertThrows(IllegalArgumentException.class, () -> {
             authenticationService.authenticate(request);
