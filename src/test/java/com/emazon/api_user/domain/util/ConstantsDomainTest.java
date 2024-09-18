@@ -2,7 +2,7 @@ package com.emazon.api_user.domain.util;
 
 import java.time.LocalDate;
 
-public class ConstantsDomain {
+public class ConstantsDomainTest {
 
     public static final String NAME = "Duvan";
     public static final String LAST_NAME = "Sanchez";
@@ -14,12 +14,13 @@ public class ConstantsDomain {
     public static final Integer ROL_ID= 1;
     public static final String ROL_NAME= "Auxiliar";
     public static final String ROL_DESCRIPTION= "Auxiliar";
-    public static final String AUX_BODEGA = "AUX_WAREHOUSE";
     public static final Integer VALUE_1 = 1;
     public static final Integer VALUE_0 = 0;
     public static final boolean VALUE_TRUE = true;
+    public static final String ROLE_AUX = "AUX_WAREHOUSE";
+    public static final String ROLE_CLIENT = "CLIENT";
 
-    private ConstantsDomain() {
+    private ConstantsDomainTest() {
 
     }
 }
