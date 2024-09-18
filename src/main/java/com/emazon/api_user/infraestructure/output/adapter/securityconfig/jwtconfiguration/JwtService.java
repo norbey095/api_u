@@ -34,6 +34,7 @@ public class JwtService {
         String authorities = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(Constants.COMA));
+
         claims.put(Constants.AUTHORITIES, authorities);
 
         return Jwts
