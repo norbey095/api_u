@@ -1,10 +1,10 @@
-package com.emazon.api_user.infraestructure.output.util;
+package com.emazon.api_user.infraestructure.util;
 
 import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordUtil {
 
-    private static final String UTIL_CLASS = "Utility class";
+    private static final String UTIL_CLASS = ConstantsInfraestructure.UTIL_CLASS;
 
     private PasswordUtil() {
         throw new UnsupportedOperationException(UTIL_CLASS);

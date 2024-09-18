@@ -2,12 +2,11 @@ package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfi
 
 import com.emazon.api_user.application.dto.authentication.AuthenticationRequestDto;
 import com.emazon.api_user.application.dto.authentication.AuthenticationResponseDto;
-import com.emazon.api_user.domain.util.ConstantsDomain;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.AuthenticationService;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
 import com.emazon.api_user.infraestructure.output.reposiroty.IUserRepository;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -53,11 +52,11 @@ class AuthenticationServiceTest {
 
     @Test
     void testAuthenticate_Success() {
-        String email = Constans.EMAIL_EJEM;
-        String password = Constans.PASSWORD_NAME;
+        String email = ConstantsInfTest.EMAIL_EJEM;
+        String password = ConstantsInfTest.PASSWORD_NAME;
 
         AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
-        String token = Constans.JWTTOKEN;
+        String token = ConstantsInfTest.JWTTOKEN;
 
         UserEntity userEntity = new UserEntity();
         userEntity.setEmail(email);
@@ -74,14 +73,14 @@ class AuthenticationServiceTest {
 
         assertEquals(token, response.getToken());
         verify(authenticationManager).authenticate(any(UsernamePasswordAuthenticationToken.class));
-        Mockito.verify(jwtService, Mockito.times(Constans.VALUE_1))
+        Mockito.verify(jwtService, Mockito.times(ConstantsInfTest.VALUE_1))
                 .generateToken(email,userDetails);
     }
 
     @Test
     void testAuthenticate_UserNotFound() {
-        String email = Constans.EMAIL_EJEM;
-        String password = Constans.PASSWORD_NAME;
+        String email = ConstantsInfTest.EMAIL_EJEM;
+        String password = ConstantsInfTest.PASSWORD_NAME;
         AuthenticationRequestDto request = new AuthenticationRequestDto(email, password);
 
         Mockito.doThrow(new IllegalArgumentException()).when(authenticationManager)

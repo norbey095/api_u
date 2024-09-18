@@ -2,7 +2,7 @@ package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfi
 
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
 import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
-import com.emazon.api_user.infraestructure.util.Constans;
+import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -51,7 +51,7 @@ class JwtauthenticationFilterTest {
 
     @Test
     void testDoFilterInternal_NoAuthHeader() throws Exception {
-        Mockito.when(request.getHeader(Constans.AUTHORIZATION)).thenReturn(null);
+        Mockito.when(request.getHeader(ConstantsInfTest.AUTHORIZATION)).thenReturn(null);
 
         jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 
@@ -61,7 +61,7 @@ class JwtauthenticationFilterTest {
 
     @Test
     void testDoFilterInternal_InvalidAuthHeader() throws Exception {
-        Mockito.when(request.getHeader(Constans.AUTHORIZATION)).thenReturn(Constans.ADMIN);
+        Mockito.when(request.getHeader(ConstantsInfTest.AUTHORIZATION)).thenReturn(ConstantsInfTest.ADMIN);
 
         jwtAuthenticationFilter.doFilterInternal(request, response, filterChain);
 

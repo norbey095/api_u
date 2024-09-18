@@ -1,9 +1,9 @@
 package com.emazon.api_user.apilication.mapper;
 
+import com.emazon.api_user.apilication.util.ConstantsApplicationTest;
 import com.emazon.api_user.application.dto.UserRequestDto;
 import com.emazon.api_user.application.mapper.UserMapper;
 import com.emazon.api_user.domain.model.UserSave;
-import com.emazon.api_user.domain.util.ConstantsDomain;
 import org.junit.jupiter.api.Test;
 import org.mapstruct.factory.Mappers;
 
@@ -18,50 +18,50 @@ class UserMapperTest {
     @Test
     void testUserRequestDtoToUserSave() {
         UserRequestDto userRequestDto = UserRequestDto.builder()
-                .name(ConstantsDomain.NAME)
-                .lastName(ConstantsDomain.LAST_NAME)
-                .documentNumber(ConstantsDomain.DOCUMENT)
-                .cellPhone(ConstantsDomain.CELLPHONE)
-                .birthdate(ConstantsDomain.BIRTHDATE)
-                .email(ConstantsDomain.EMAIL)
-                .password(ConstantsDomain.PASSWORD)
+                .name(ConstantsApplicationTest.NAME)
+                .lastName(ConstantsApplicationTest.LAST_NAME)
+                .documentNumber(ConstantsApplicationTest.DOCUMENT)
+                .cellPhone(ConstantsApplicationTest.CELLPHONE)
+                .birthdate(ConstantsApplicationTest.BIRTHDATE)
+                .email(ConstantsApplicationTest.EMAIL)
+                .password(ConstantsApplicationTest.PASSWORD)
                 .build();
 
-        UserSave usertestSave = userMapper.userRequestDtoToUserSave(userRequestDto);
+        UserSave userTestSave = userMapper.userRequestDtoToUserSave(userRequestDto);
 
-        assertNotNull(usertestSave);
-        assertEquals(userRequestDto.getName(),usertestSave.getName());
-        assertEquals(userRequestDto.getLastName(),usertestSave.getLastName());
-        assertEquals(userRequestDto.getDocumentNumber(), usertestSave.getDocumentNumber());
-        assertEquals(userRequestDto.getCellPhone(), usertestSave.getCellPhone());
-        assertEquals(userRequestDto.getBirthdate(), usertestSave.getBirthdate());
-        assertEquals(userRequestDto.getEmail(), usertestSave.getEmail());
-        assertEquals(userRequestDto.getPassword(), usertestSave.getPassword());
+        assertNotNull(userTestSave);
+        assertEquals(userRequestDto.getName(),userTestSave.getName());
+        assertEquals(userRequestDto.getLastName(),userTestSave.getLastName());
+        assertEquals(userRequestDto.getDocumentNumber(), userTestSave.getDocumentNumber());
+        assertEquals(userRequestDto.getCellPhone(), userTestSave.getCellPhone());
+        assertEquals(userRequestDto.getBirthdate(), userTestSave.getBirthdate());
+        assertEquals(userRequestDto.getEmail(), userTestSave.getEmail());
+        assertEquals(userRequestDto.getPassword(), userTestSave.getPassword());
 
     }
 
     @Test
     void testUserRequestDtoToUserSaveMap() {
         UserRequestDto userRequestDto = UserRequestDto.builder()
-                .name(ConstantsDomain.NAME)
-                .lastName(ConstantsDomain.LAST_NAME)
-                .documentNumber(ConstantsDomain.DOCUMENT)
-                .cellPhone(ConstantsDomain.CELLPHONE)
-                .birthdate(ConstantsDomain.BIRTHDATE)
-                .email(ConstantsDomain.EMAIL)
-                .password(ConstantsDomain.PASSWORD)
+                .name(ConstantsApplicationTest.NAME)
+                .lastName(ConstantsApplicationTest.LAST_NAME)
+                .documentNumber(ConstantsApplicationTest.DOCUMENT)
+                .cellPhone(ConstantsApplicationTest.CELLPHONE)
+                .birthdate(ConstantsApplicationTest.BIRTHDATE)
+                .email(ConstantsApplicationTest.EMAIL)
+                .password(ConstantsApplicationTest.PASSWORD)
                 .build();
 
-        UserSave usertestSave = userMapper.map(userRequestDto);
+        UserSave userTestSave = userMapper.map(userRequestDto);
 
-        assertNotNull(usertestSave);
-        assertEquals(userRequestDto.getName(),usertestSave.getName());
-        assertEquals(userRequestDto.getLastName(),usertestSave.getLastName());
-        assertEquals(userRequestDto.getDocumentNumber(), usertestSave.getDocumentNumber());
-        assertEquals(userRequestDto.getCellPhone(), usertestSave.getCellPhone());
-        assertEquals(userRequestDto.getBirthdate(), usertestSave.getBirthdate());
-        assertEquals(userRequestDto.getEmail(), usertestSave.getEmail());
-        assertEquals(userRequestDto.getPassword(), usertestSave.getPassword());
+        assertNotNull(userTestSave);
+        assertEquals(userRequestDto.getName(),userTestSave.getName());
+        assertEquals(userRequestDto.getLastName(),userTestSave.getLastName());
+        assertEquals(userRequestDto.getDocumentNumber(), userTestSave.getDocumentNumber());
+        assertEquals(userRequestDto.getCellPhone(), userTestSave.getCellPhone());
+        assertEquals(userRequestDto.getBirthdate(), userTestSave.getBirthdate());
+        assertEquals(userRequestDto.getEmail(), userTestSave.getEmail());
+        assertEquals(userRequestDto.getPassword(), userTestSave.getPassword());
 
     }
 
