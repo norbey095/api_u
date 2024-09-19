@@ -74,6 +74,13 @@ public class ControllerUserAdvisor {
                 HttpStatus.BAD_REQUEST.toString()));
     }
 
+    @ExceptionHandler(CredentialsException.class)
+    public ResponseEntity<ExceptionResponse> handleCredentialsException (CredentialsException  exception) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionResponse(
+                ExceptionResponseConstants.INCORRECT_DATA.getMessage(),
+                HttpStatus.UNAUTHORIZED.toString()));
+    }
+
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<ExceptionResponse> handleBadCredentialsException (BadCredentialsException  exception) {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ExceptionResponse(

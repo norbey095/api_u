@@ -1,9 +1,9 @@
 package com.emazon.api_user.infraestructure.exceptionhandler;
 
 import com.emazon.api_user.application.dto.UserRequestDto;
-import com.emazon.api_user.application.handler.IUserHandler;
+import com.emazon.api_user.application.handler.user.IUserHandler;
 import com.emazon.api_user.domain.exception.*;
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
+import com.emazon.api_user.infraestructure.output.util.JwtService;
 import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -156,5 +157,33 @@ class ControllerUserAdvisorTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
                         .value(ConstantsInfTest.DATE_TIME));
+    }
+
+    @Test
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
+    void whenCredentialsException_thenReturnsUnauthorized() throws Exception {
+        Mockito.doThrow(new CredentialsException()).when(userHandler)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(ConstantsInfTest.JSON_REQUEST))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.INCORRECT_DATA));
+    }
+
+    @Test
+    @WithMockUser(username = ConstantsInfTest.USER_NAME, roles = {ConstantsInfTest.ADMIN})
+    void whenAccessDeniedException_thenReturnsForbidden() throws Exception {
+        Mockito.doThrow(new AccessDeniedException(ConstantsInfTest.ACCESS_DENE)).when(userHandler)
+                .saveUser(Mockito.any(UserRequestDto.class), Mockito.any(String.class));
+
+        mockMvc.perform(MockMvcRequestBuilders.post(ConstantsInfTest.URL_USER)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(ConstantsInfTest.JSON_REQUEST))
+                .andExpect(MockMvcResultMatchers.status().isForbidden())
+                .andExpect(MockMvcResultMatchers.jsonPath(ConstantsInfTest.MESSAGE)
+                        .value(ConstantsInfTest.ACCESS_DENE));
     }
 }

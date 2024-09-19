@@ -1,7 +1,7 @@
-package com.emazon.api_user.infraestructure.output.adapter.adapter.securityconfig.jwtconfiguration;
+package com.emazon.api_user.infraestructure.configuration.jwtconfiguration;
 
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtService;
+import com.emazon.api_user.infraestructure.configuration.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
+import com.emazon.api_user.infraestructure.output.util.JwtService;
 import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

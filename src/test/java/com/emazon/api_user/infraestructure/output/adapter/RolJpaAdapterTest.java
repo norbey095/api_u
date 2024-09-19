@@ -1,7 +1,6 @@
 package com.emazon.api_user.infraestructure.output.adapter;
 
 import com.emazon.api_user.domain.model.RolSave;
-import com.emazon.api_user.infraestructure.output.adapter.adapter.RolJpaAdapter;
 import com.emazon.api_user.infraestructure.output.entity.RolEntity;
 import com.emazon.api_user.infraestructure.output.mapper.RolEntityMapper;
 import com.emazon.api_user.infraestructure.output.reposiroty.IRolRepository;

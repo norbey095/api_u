@@ -1,6 +1,6 @@
-package com.emazon.api_user.infraestructure.output.adapter.securityconfig;
+package com.emazon.api_user.infraestructure.configuration.securityconfig;
 
-import com.emazon.api_user.infraestructure.output.adapter.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
+import com.emazon.api_user.infraestructure.configuration.securityconfig.jwtconfiguration.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,12 +27,12 @@ public class ConfigFilter {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll()
-                )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)                )
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().permitAll()
+                )
                 .build();
     }
 }

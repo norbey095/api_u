@@ -1,6 +1,7 @@
-package com.emazon.api_user.infraestructure.output.adapter.securityconfig;
+package com.emazon.api_user.infraestructure.configuration.securityconfig;
 
 import com.emazon.api_user.infraestructure.output.reposiroty.IUserRepository;
+import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,7 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -38,7 +40,8 @@ public class BeanConfiguration {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new UserDetailService(userRepository);
+        return userEmail -> userRepository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException(ConstantsInfraestructure.USER_NOT_FOUND_POINTS));
     }
 
     @Bean

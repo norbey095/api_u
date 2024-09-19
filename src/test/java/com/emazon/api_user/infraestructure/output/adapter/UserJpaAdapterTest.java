@@ -1,11 +1,10 @@
 package com.emazon.api_user.infraestructure.output.adapter;
 
 import com.emazon.api_user.domain.model.UserSave;
-import com.emazon.api_user.infraestructure.output.adapter.adapter.UserJpaAdapter;
 import com.emazon.api_user.infraestructure.output.entity.UserEntity;
 import com.emazon.api_user.infraestructure.output.mapper.UserEntityMapper;
 import com.emazon.api_user.infraestructure.output.reposiroty.IUserRepository;
-import com.emazon.api_user.infraestructure.util.PasswordUtil;
+import com.emazon.api_user.infraestructure.output.util.PasswordUtil;
 import com.emazon.api_user.infraestructure.util.ConstantsInfTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
