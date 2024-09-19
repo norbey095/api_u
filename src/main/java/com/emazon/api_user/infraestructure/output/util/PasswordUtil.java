@@ -1,5 +1,6 @@
-package com.emazon.api_user.infraestructure.util;
+package com.emazon.api_user.infraestructure.output.util;
 
+import com.emazon.api_user.infraestructure.util.ConstantsInfraestructure;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class PasswordUtil {
