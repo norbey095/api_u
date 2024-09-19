@@ -20,5 +20,4 @@ public interface UserMapper {
                 .setPassword(dto.getPassword())
                 .build();
     }
-
 }
